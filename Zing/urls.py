@@ -16,19 +16,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
-import socialmedia.views
+from django.conf import settings
+from django.conf.urls.static import static
+#import socialmedia.views
 from . import views
 #from socialmedia import views as socialmedia_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.homepage, name='homepage'),
-    path('about/', views.aboutpage),
+    path('about/', views.aboutpage, name='about'),
     path('login/', views.loginpage, name='login'),
     path('register/', views.registerpage, name='register'),
     path('logout/', views.logoutpage, name='logout'),
-    path('profile/', views.profilepage),
-    path('editprofile/', views.editprofilepage),
+    path('profile/', views.profilepage, name='profile'),
+    path('editprofile/', views.editprofilepage, name='editprofile'),
     path('viewprofile/', views.viewprofilepage),
     path('dashboard/', views.dashboardpage),
     path('resetpassword/', views.resetpasswordpage),
@@ -63,3 +64,6 @@ urlpatterns = [
    #path('rateuser', socialmedia_views.rateuser),
 
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

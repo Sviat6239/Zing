@@ -2,11 +2,12 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
+from .forms import UserProfileForm
 def homepage(request):
     return render(request, 'index.html')
 
 def aboutpage(request):
-    pass
+    return render(request, 'about.html')
 
 def registerpage(request):
     if request.method == 'POST':
@@ -46,10 +47,27 @@ def logoutpage(request):
     return redirect('login')
 
 def profilepage(request):
-    pass
+    if request.user.is_authenticated:
+        user = request.user
+        return render(request, 'profile.html', {'user': user})
+    else:
+        return redirect('login')
+
 
 def editprofilepage(request):
-    pass
+    if request.user.is_authenticated:
+        user = request.user
+        if request.method == 'POST':
+            form = UserProfileForm(request.POST, request.FILES, instance=user)
+            if form.is_valid():
+                form.save()
+                return redirect('profile')
+        else:
+            form = UserProfileForm(instance=user)
+
+        return render(request, 'editprofile.html', {'form': form})
+    else:
+        return redirect('login')
 
 def viewprofilepage(request):
     pass
