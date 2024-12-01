@@ -7,6 +7,9 @@
 </head>
 <body>
     <h1>Welcome to the Homepage!</h1>
+    
+    <p><a href="{% url 'about' %}">About Us</a></p>
+
     {% if user.is_authenticated %}
         <p>Hello, {{ user.first_name }} {{ user.last_name }}!</p>
         <form action="{% url 'logout' %}" method="post">

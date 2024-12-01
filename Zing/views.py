@@ -6,7 +6,7 @@ def homepage(request):
     return render(request, 'index.html')
 
 def aboutpage(request):
-    pass
+    return render(request, 'about.html')
 
 def registerpage(request):
     if request.method == 'POST':
