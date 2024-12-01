@@ -2,9 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
 </head>
 <body>
+    <h1>Profile of {{ user.display_name }}</h1>
 
+    <div>
+        <img src="{{ user.avatar.url }}" alt="{{ user.display_name }}'s Avatar" width="150" height="150">
+    </div>
+
+    <div>
+        <h3>First Name:</h3>
+        <p>{{ user.first_name }}</p>
+        <h3>Last Name:</h3>
+        <p>{{ user.last_name }}</p>
+        <h3>Biography:</h3>
+        <p>{{ user.bio }}</p>
+        <h3>Username:</h3>
+        <p>{{ user.username }}</p>
+    </div>
+    
+    <div>
+        <a href="{% url 'editprofile' %}">
+            <button type="button">Edit Profile</button>
+        </a>
+    </div>
 </body>
 </html>
