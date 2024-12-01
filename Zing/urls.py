@@ -22,11 +22,11 @@ from . import views
 #from socialmedia import views as socialmedia_views
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.homepage),
+    path('', views.homepage, name='homepage'),
     path('about/', views.aboutpage),
-    path('login/', views.loginpage),
-    path('register/', views.registerpage),
-    path('logout/', views.logoutpage),
+    path('login/', views.loginpage, name='login'),
+    path('register/', views.registerpage, name='register'),
+    path('logout/', views.logoutpage, name='logout'),
     path('profile/', views.profilepage),
     path('editprofile/', views.editprofilepage),
     path('viewprofile/', views.viewprofilepage),

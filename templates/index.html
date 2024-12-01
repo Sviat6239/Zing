@@ -7,11 +7,14 @@
 </head>
 <body>
     <h1>Welcome to the Homepage!</h1>
-    <nav>
-        <ul>
-            <li><a href="/register/">Register</a></li>
-            <li><a href="/login/">Login</a></li>
-        </ul>
-    </nav>
+    {% if user.is_authenticated %}
+        <p>Hello, {{ user.first_name }} {{ user.last_name }}!</p>
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
+    {% else %}
+        <p>You are not logged in. <a href="{% url 'login' %}">Login</a> or <a href="{% url 'register' %}">Register</a>.</p>
+    {% endif %}
 </body>
 </html>
