@@ -21,6 +21,8 @@ from django.conf.urls.static import static
 #import socialmedia.views
 from . import views
 #from socialmedia import views as socialmedia_views
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.homepage, name='homepage'),
