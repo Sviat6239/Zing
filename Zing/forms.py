@@ -5,3 +5,6 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'bio', 'avatar', 'display_name']
+        widgets = {
+            'bio': forms.Textarea(attrs={'rows': 5, 'cols': 40}),
+        }

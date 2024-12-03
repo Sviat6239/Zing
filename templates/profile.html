@@ -6,13 +6,19 @@
     <title>User Profile</title>
 </head>
 <body>
-    <h1>Profile of {{ user.display_name }}</h1>
+    <h1>Profile of {{ user.get_display_name }}</h1>
 
     <div>
-        <img src="{{ user.avatar.url }}" alt="{{ user.display_name }}'s Avatar" width="150" height="150">
+        {% if user.avatar %}
+            <img src="{{ user.avatar.url }}" alt="{{ user.get_display_name }}'s Avatar" width="150" height="150">
+        {% else %}
+            <img src="{% static 'default-avatar.png' %}" alt="Default Avatar" width="150" height="150">
+        {% endif %}
     </div>
 
     <div>
+        <h3>Display Name:</h3>
+        <p>{{ user.get_display_name }}</p>
         <h3>First Name:</h3>
         <p>{{ user.first_name }}</p>
         <h3>Last Name:</h3>
