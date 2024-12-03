@@ -7,4 +7,5 @@ class UserProfileForm(forms.ModelForm):
         fields = ['first_name', 'last_name', 'bio', 'avatar', 'display_name']
         widgets = {
             'bio': forms.Textarea(attrs={'rows': 5, 'cols': 40}),
+            'display_name': forms.TextInput(attrs={'placeholder': 'Enter your display name'}),
         }

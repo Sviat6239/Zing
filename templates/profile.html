@@ -10,9 +10,9 @@
 
     <div>
         {% if user.avatar %}
-            <img src="{{ user.avatar.url }}" alt="{{ user.get_display_name }}'s Avatar" width="150" height="150">
+            <img src="{{ user.avatar.url }}" alt="Profile Image">
         {% else %}
-            <img src="{% static 'default-avatar.png' %}" alt="Default Avatar" width="150" height="150">
+            <p>No avatar set</p>
         {% endif %}
     </div>
 

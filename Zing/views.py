@@ -1,8 +1,13 @@
+import random
+import string
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 from .forms import UserProfileForm
+from django.contrib.auth.decorators import login_required
+from django.utils.crypto import get_random_string
+
 def homepage(request):
     return render(request, 'index.html')
 
@@ -54,12 +59,21 @@ def profilepage(request):
         return redirect('login')
 
 
+@login_required
 def editprofilepage(request):
     if request.user.is_authenticated:
         user = request.user
         if request.method == 'POST':
             form = UserProfileForm(request.POST, request.FILES, instance=user)
             if form.is_valid():
+                # Генерация случайного имени для аватара, если изображение загружено
+                avatar = form.cleaned_data.get('avatar')
+                if avatar:
+                    # Генерируем случайное имя для файла
+                    random_string = get_random_string(length=8)  # длина строки 8 символов
+                    extension = avatar.name.split('.')[-1]  # расширение файла
+                    avatar.name = f"profile_{random_string}.{extension}"  # новое имя файла
+                    user.avatar = avatar  # сохраняем аватар с новым именем
                 form.save()
                 return redirect('profile')
         else:
