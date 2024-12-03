@@ -6,7 +6,7 @@ class User(models.Model):
     username = models.CharField(max_length=50, unique=True, verbose_name="Username")
     password = models.CharField(max_length=128, verbose_name="Password")
     bio = models.TextField(blank=True, null=True, verbose_name="Biography", max_length=10000)
-    avatar = models.ImageField(upload_to='avatars/', blank=True, null=True, verbose_name="Avatar")  # Указан путь для загрузки аватаров
+    avatar = models.ImageField(upload_to='avatars/', blank=True, null=True, verbose_name="Avatar")
     display_name = models.CharField(max_length=100, blank=True, null=True, verbose_name="Display Name")
 
     def __str__(self):

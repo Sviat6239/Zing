@@ -66,14 +66,12 @@ def editprofilepage(request):
         if request.method == 'POST':
             form = UserProfileForm(request.POST, request.FILES, instance=user)
             if form.is_valid():
-                # Генерация случайного имени для аватара, если изображение загружено
                 avatar = form.cleaned_data.get('avatar')
                 if avatar:
-                    # Генерируем случайное имя для файла
-                    random_string = get_random_string(length=8)  # длина строки 8 символов
-                    extension = avatar.name.split('.')[-1]  # расширение файла
-                    avatar.name = f"profile_{random_string}.{extension}"  # новое имя файла
-                    user.avatar = avatar  # сохраняем аватар с новым именем
+                    random_string = get_random_string(length=8)
+                    extension = avatar.name.split('.')[-1]
+                    avatar.name = f"profile_{random_string}.{extension}"
+                    user.avatar = avatar
                 form.save()
                 return redirect('profile')
         else:
